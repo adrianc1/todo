@@ -1,47 +1,68 @@
 import './style.css';
 import addIcon from './addicon.svg';
+import createForm from './form.js';
 
 
-/* need to finish building out module class for this app */
-class taskManager {
-    constructor(mainContent) {
-        this.mainContent = mainContent;
+class TaskManager {
+    constructor() {
+        this.mainContent = document.getElementById("main-content");
     }
-    addTaskContainer() {
-        const addTaskContainer = document.createElement('div');
-        addTaskContainer.setAttribute('id', 'task-container');
-        return addTaskContainer;
+
+    taskItem() {
+        const taskItem = document.createElement('li');
+        taskItem.setAttribute('class', 'task-item');
+        return taskItem;
     }
+
+    addIcon() {
+        const myIcon = new Image();
+        myIcon.src = addIcon;
+        myIcon.setAttribute('class', 'icon');
+        return myIcon;
+    }
+
+    appendElement(taskContainer) {
+        const taskItem = this.taskItem();
+        const icon1 = this.addIcon();
+        const addTaskText = "Add Task Here";
+
+        taskItem.appendChild(icon1);
+        taskItem.append(addTaskText)
+        taskContainer.append(taskItem);
+        this.mainContent.appendChild(taskContainer);
+        return this;
+    }
+
+    createNewTask() {
+        const newTask = new TaskManager();
+        newTask.appendElement(taskContainer);
+        taskContainer.addEventListener('click', newTask.createNewTask)
+        return this;
+    }
+
 };
 
-/* Create HTML Elements */
 
+class TaskContainer {
+    constructor() {
+        this.taskContainer = document.createElement('ul');
+        this.taskContainer.setAttribute('class', 'task-container');
+        return this.taskContainer;
+    }
 
-const addTaskText = document.createElement('span');
-
-addTaskText.innerHTML = 'Add Task here';
-
-/* create add icon */
-const myIcon = new Image();
-myIcon.src = addIcon;
-
-/* Set element attributes */
-myIcon.setAttribute('id', 'icon');
-addTaskText.setAttribute('id',  'task-text');
-
-
-/* Append containers to main content */
-addTaskContainer.appendChild(myIcon);
-addTaskContainer.appendChild(addTaskText);
-mainContent.appendChild(addTaskContainer)
-
-
-/* Populate input field on clicking text */
-addTaskText.addEventListener('click', inputTask);
-
-function inputTask() {
-    const input = document.createElement('input');
-    addTaskText.classList.add('hidden');
-
-    addTaskContainer.appendChild(input);
+    taskItem() {
+        const taskItem = document.createElement('li');
+        taskItem.setAttribute('class', 'task-item');
+        return taskItem;
+    }
 }
+ 
+function init() {
+    const task = new TaskManager();
+    task.appendElement(taskContainer);
+    taskContainer.addEventListener('click', task.createNewTask);
+}
+
+const taskContainer = new TaskContainer();
+
+init();

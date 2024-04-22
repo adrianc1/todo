@@ -1,7 +1,7 @@
 import './style.css';
 import addIcon from './addicon.svg';
 import createForm from './form.js';
-
+const header = document.getElementById('heading');
 
 class TaskManager {
     constructor() {
@@ -17,16 +17,14 @@ class TaskManager {
     addIcon() {
         const myIcon = new Image();
         myIcon.src = addIcon;
-        myIcon.setAttribute('class', 'icon');
+        myIcon.setAttribute('id', 'icon');
         return myIcon;
     }
 
     appendElement(taskContainer) {
         const taskItem = this.taskItem();
-        const icon1 = this.addIcon();
         const addTaskText = "Add Task Here";
-
-        taskItem.appendChild(icon1);
+        taskItem.contentEditable = 'true';
         taskItem.append(addTaskText)
         taskContainer.append(taskItem);
         this.mainContent.appendChild(taskContainer);
@@ -36,7 +34,7 @@ class TaskManager {
     createNewTask() {
         const newTask = new TaskManager();
         newTask.appendElement(taskContainer);
-        taskContainer.addEventListener('click', newTask.createNewTask)
+        header.addEventListener('click', newTask.createNewTask);
         return this;
     }
 
@@ -49,20 +47,16 @@ class TaskContainer {
         this.taskContainer.setAttribute('class', 'task-container');
         return this.taskContainer;
     }
+};
 
-    taskItem() {
-        const taskItem = document.createElement('li');
-        taskItem.setAttribute('class', 'task-item');
-        return taskItem;
-    }
-}
  
+/* initialize project */
 function init() {
     const task = new TaskManager();
     task.appendElement(taskContainer);
-    taskContainer.addEventListener('click', task.createNewTask);
+    header.appendChild(task.addIcon())
+    header.addEventListener('click', task.createNewTask);
 }
-
 const taskContainer = new TaskContainer();
 
 init();

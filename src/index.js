@@ -1,5 +1,6 @@
 import './style.css';
 import addIcon from './addicon.svg';
+import svg from './trash.svg'
 import createForm from './form.js';
 const header = document.getElementById('heading');
 
@@ -21,11 +22,20 @@ class TaskManager {
         return myIcon;
     }
 
+    trashIcon() {
+        const trash = new Image();
+        trash.src = svg;
+        trash.setAttribute('class', 'delete');
+        return trash;
+    }
+
     appendElement(taskContainer) {
         const taskItem = this.taskItem();
+        const deletebtn = this.trashIcon();
         const addTaskText = "Add Task Here";
         taskItem.contentEditable = 'true';
-        taskItem.append(addTaskText)
+        taskItem.append(addTaskText);
+        taskItem.append(deletebtn)
         taskContainer.append(taskItem);
         this.mainContent.appendChild(taskContainer);
         return this;
@@ -40,7 +50,6 @@ class TaskManager {
 
 };
 
-
 class TaskContainer {
     constructor() {
         this.taskContainer = document.createElement('ul');
@@ -48,7 +57,6 @@ class TaskContainer {
         return this.taskContainer;
     }
 };
-
  
 /* initialize project */
 function init() {

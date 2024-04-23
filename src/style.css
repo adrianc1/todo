@@ -19,11 +19,15 @@ body {
     border: 2px solid white;
 }
 
+#heading {
+    display: flex;
+    justify-content: space-around;
+}
+
 #main-content {
     width: 500px;
     height: auto;
     flex: 3;
-    border: 2px solid yellow;
 }
 
 #icon {
@@ -41,6 +45,7 @@ img {
 }
 
 .task-item {
+    width: 100%;
     display: flex;
     align-items: center;
     list-style: none;
@@ -49,4 +54,9 @@ img {
 .hidden {
     display: none;
 }
+
+.delete {
+    width: 1.2rem;
+    cursor: pointer;
+};
 

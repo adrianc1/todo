@@ -37,6 +37,9 @@ class TaskManager {
         taskItem.append(addTaskText);
         taskItem.append(deletebtn)
         taskContainer.append(taskItem);
+        deletebtn.addEventListener('click', () => {
+            taskItem.remove();
+        })
         this.mainContent.appendChild(taskContainer);
         return this;
     }
@@ -48,6 +51,12 @@ class TaskManager {
         return this;
     }
 
+    deleteTask() {
+       const deletebtn = this.trashIcon();
+       deletebtn.addEventListener('click', () => {
+            console.log('yeeee')
+       })
+    }
 };
 
 class TaskContainer {
@@ -61,10 +70,14 @@ class TaskContainer {
 /* initialize project */
 function init() {
     const task = new TaskManager();
+    const addTask = task.addIcon();
     task.appendElement(taskContainer);
-    header.appendChild(task.addIcon())
+    
+    header.appendChild(addTask);
     header.addEventListener('click', task.createNewTask);
+    task.deleteTask();
 }
 const taskContainer = new TaskContainer();
 
 init();
+

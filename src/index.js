@@ -1,8 +1,10 @@
 import './style.css';
+import { projectFolder, createNewFolder } from './folder.js'
 import addIcon from './addicon.svg';
 import svg from './trash.svg'
 import createForm from './form.js';
 const header = document.getElementById('heading');
+
 
 class TaskManager {
     constructor() {
@@ -18,7 +20,7 @@ class TaskManager {
     addIcon() {
         const myIcon = new Image();
         myIcon.src = addIcon;
-        myIcon.setAttribute('id', 'icon');
+        myIcon.setAttribute('class', 'icon');
         return myIcon;
     }
 
@@ -29,24 +31,24 @@ class TaskManager {
         return trash;
     }
 
-    appendElement(taskContainer) {
+    appendElement(container) {
         const taskItem = this.taskItem();
         const deletebtn = this.trashIcon();
-        const addTaskText = "Add Task Here";
+        const addTaskItemText = "Add Task Here";
         taskItem.contentEditable = 'true';
-        taskItem.append(addTaskText);
+        taskItem.append(addTaskItemText);
         taskItem.append(deletebtn)
-        taskContainer.append(taskItem);
+        container.append(taskItem);
         deletebtn.addEventListener('click', () => {
             taskItem.remove();
         })
-        this.mainContent.appendChild(taskContainer);
+        this.mainContent.appendChild(container);
         return this;
     }
 
     createNewTask() {
         const newTask = new TaskManager();
-        newTask.appendElement(taskContainer.taskContainer);
+        newTask.appendElement(container.container);
         header.addEventListener('click', newTask.createNewTask);
         return this;
     }
@@ -62,31 +64,39 @@ class TaskManager {
 /* create task container  */
 class ProjectContainer {
     constructor() {
-        this.taskContainer = document.createElement('ul');
-        this.taskContainer.setAttribute('class', 'task-container');
+        this.container = document.createElement('ul');
+        this.container.setAttribute('class', 'task-container');
         this.innerHTML = `Project #1`
-    }
-    createProjectFolder() {
-        const nav = document.getElementById('nav');
-        nav.append(taskContainer.innerHTML)
-
     }
 };
  
 
 /* initialize project */
 function init() {
-
+    const nav = document.getElementById('nav');
     const task = new TaskManager();
-    const addTask = task.addIcon();
-    task.appendElement(taskContainer.taskContainer);
-    
-    header.appendChild(addTask);
-    header.addEventListener('click', task.createNewTask);
+    const newFolder = new projectFolder('project dd1');
+    newFolder.addFolderToNav();
+
+    /* adding icons  */
+    const addTaskBtn = task.addIcon();
+    const addFolderBtn = task.addIcon();
+    header.appendChild(addTaskBtn);
+    nav.appendChild(addFolderBtn);
+
+    /* adding folder to the nav onclick */
+    addFolderBtn.addEventListener('click', () => {
+        let newFolderInput = prompt('folder name');
+        const newFolderName = new projectFolder(newFolderInput);
+        newFolderName.addFolderToNav();
+    })
+
+
+    addTaskBtn.addEventListener('click', task.createNewTask);
     task.deleteTask();
 }
-const taskContainer = new ProjectContainer();
-const test = taskContainer.createProjectFolder();
+const container = new ProjectContainer();
+
 
 
 init();

@@ -30,12 +30,12 @@ body {
     flex: 3;
 }
 
-#icon {
+.icon {
     cursor: pointer;
 }
 
 img {
-    width: 8%;
+    width: 1rem;
 }
 
 .task-container {

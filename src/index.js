@@ -3,6 +3,7 @@ import { projectFolder, createNewFolder } from './folder.js'
 import addIcon from './addicon.svg';
 import svg from './trash.svg';
 const header = document.getElementById('heading');
+
 const test = document.querySelectorAll('folder-list-item')
 
 class TaskManager {

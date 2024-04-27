@@ -1,10 +1,8 @@
 import './style.css';
-import { projectFolder, createNewFolder } from './folder.js'
+import { projectFolder, createNewFolder, addTask } from './folder.js'
 import addIcon from './addicon.svg';
 import svg from './trash.svg';
 const header = document.getElementById('heading');
-
-const test = document.querySelectorAll('folder-list-item')
 
 class TaskManager {
     constructor() {
@@ -62,7 +60,7 @@ class TaskManager {
 };
 
 /* create task container  */
-class ProjectContainer {
+class ProjectContainer extends TaskManager {
     constructor() {
         this.container = document.createElement('ul');
         this.container.setAttribute('class', 'task-container');
@@ -86,20 +84,12 @@ function init() {
     addFolderBtn.addEventListener('click', createNewFolder)
 
     /* creating new task in main content onclick  */
-    addTaskBtn.addEventListener('click', task.createNewTask);
+    addTaskBtn.addEventListener('click', addTask);
     task.deleteTask();
 }
-const container = new ProjectContainer();
-const nav = document.getElementById('nav');
 
-nav.addEventListener("click", function(e) {
-	// e.target is the clicked element!
-	// If it was a list item
-	if(e.target && e.target.nodeName == "ul") {
-		// List item found!  Output the ID!
-		console.log("List item ", e.target.id.replace("post-", ""), " was clicked!");
-	}
-});
+/* const container = new ProjectContainer(); */
+
 
 
 init();

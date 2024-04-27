@@ -12,7 +12,6 @@ export class projectFolder {
         const folderContainer = document.createElement('ul');
         folderContainer.setAttribute('class', 'folder-list-item');  
         folderContainer.append(this.folderName);
-        console.log(this)
         nav.append(folderContainer);
 
         folderContainer.addEventListener('click', () => {
@@ -25,11 +24,6 @@ export class projectFolder {
             }
         })
     }
-
-    addTaskToFolder() {
-        const nav = document.getElementById('nav');
-        this.listContainer.push('shiiitt');
-    }
 }
 
 export function createNewFolder() {
@@ -39,3 +33,7 @@ export function createNewFolder() {
     
 };
 
+export function addTask() {
+    let item = prompt('add list item:');
+    
+ }

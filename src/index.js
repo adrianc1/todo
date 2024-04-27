@@ -72,7 +72,20 @@ class ProjectContainer extends TaskManager {
 /* initialize project */
 function init() {
     const nav = document.getElementById('nav');
+    const defaultFolder = new projectFolder('Folder 1');
+    defaultFolder.listContainer.push('hey');
+    defaultFolder.listContainer.push('you!');
+    console.log(defaultFolder);
+
+    defaultFolder.addFolderToNav();
     const task = new TaskManager();
+
+    defaultFolder.listContainer.forEach((item) => {
+        const taskItem = document.createElement('li');
+        taskItem.setAttribute('class', 'task-item');
+        taskItem.append(item);
+        console.log(taskItem)
+    })
 
     /* adding icons  */
     const addTaskBtn = task.addIcon();

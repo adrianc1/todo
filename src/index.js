@@ -75,7 +75,6 @@ function init() {
     const defaultFolder = new projectFolder('Folder 1');
     defaultFolder.listContainer.push('hey');
     defaultFolder.listContainer.push('you!');
-    console.log(defaultFolder);
 
     defaultFolder.addFolderToNav();
     const task = new TaskManager();
@@ -84,7 +83,8 @@ function init() {
         const taskItem = document.createElement('li');
         taskItem.setAttribute('class', 'task-item');
         taskItem.append(item);
-        console.log(taskItem)
+        console.log(taskItem);
+        task.mainContent.append(taskItem)
     })
 
     /* adding icons  */
